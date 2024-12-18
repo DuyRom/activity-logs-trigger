@@ -3,6 +3,7 @@
 namespace Odinbi\ActivityLogsWithTrigger\Services;
 
 use Illuminate\Console\Command;
+use Odinbi\ActivityLogsWithTrigger\Services\TriggerService;
 
 class CreateDatabaseTriggers extends Command
 {

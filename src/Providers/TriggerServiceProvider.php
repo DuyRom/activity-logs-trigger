@@ -19,6 +19,8 @@ class TriggerServiceProvider extends ServiceProvider
                 CreateAllTriggers::class,
             ]);
         }
+
+        $this->registerMiddleware();
     }
 
     public function register()
@@ -40,5 +42,15 @@ class TriggerServiceProvider extends ServiceProvider
         ];
 
         $this->publishes($paths, 'odb-activity-log');
+    }
+
+    protected function registerMiddleware()
+    {
+        $router = $this->app['router'];
+        $groups = config('activity-logs-trigger.middleware_groups', []);
+
+        foreach ($groups as $group) {
+            $router->pushMiddlewareToGroup($group, \Odinbi\ActivityLogsWithTrigger\Http\Middleware\SetCurrentUserId::class);
+        }
     }
 }

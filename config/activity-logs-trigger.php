@@ -2,6 +2,12 @@
 
 return [
     'tables' => [
-        // List of tables that need to create triggers
+        // users,
+        // posts,
+    ],
+
+    'middleware_groups' => [
+        'web',
+        // 'api', // Uncomment this line to include in the API group as well
     ],
 ];

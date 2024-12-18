@@ -3,8 +3,7 @@
 namespace Odinbi\ActivityLogsWithTrigger\Services;
 
 use Illuminate\Console\Command;
-use App\Services\TriggerService;
-
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 class CreateAllTriggers extends Command
 {

@@ -32,6 +32,8 @@ class TriggerServiceProvider extends ServiceProvider
         $this->app->singleton(TriggerService::class, fn($app) => new TriggerService());
 
         $this->registerPublish();
+
+        $this->cleanOldActivityLogs();
     }
 
     protected function registerPublish()
@@ -52,5 +54,12 @@ class TriggerServiceProvider extends ServiceProvider
         foreach ($groups as $group) {
             $router->pushMiddlewareToGroup($group, \Odinbi\ActivityLogsWithTrigger\Http\Middleware\SetCurrentUserId::class);
         }
+    }
+
+    protected function cleanOldActivityLogs()
+    {
+        $this->commands([
+            \Odinbi\ActivityLogsWithTrigger\Console\Commands\CleanOldActivityLogs::class,
+        ]);
     }
 }

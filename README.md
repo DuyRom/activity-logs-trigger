@@ -42,7 +42,7 @@ Go to app/config/activity-logs-trigger.php to configure the necessary variables
 
 
 ### Schedule
-Configure automatic schedule to delete old logs according to retain days, EX:
+Configure automatic schedule to delete old logs according to retain days, ex:
 
 ```bash
 $schedule->command('logs:clean-old')->dailyAt('01:00');
@@ -56,7 +56,7 @@ Create triggers for all tables defined in activity-logs-trigger
 php artisan db:create-all-triggers
 ```
 
-Add a trigger to any table, **php artisan db:create-triggers <table>** 
+Add a trigger to any table, **php artisan db:create-triggers table_name** 
 For example to the users table
 
 ```bash

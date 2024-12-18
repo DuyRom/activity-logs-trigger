@@ -49,7 +49,7 @@ Create triggers for all tables defined in activity-logs-trigger
 php artisan db:create-all-triggers
 ```
 
-Add a trigger to any table (db:create-triggers <table> ), Add a trigger to any table, for example to the users table
+Add a trigger to any table, **php artisan db:create-triggers <table>** Add a trigger to any table, for example to the users table
 
 ```bash
 php artisan db:create-triggers users

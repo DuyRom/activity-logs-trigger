@@ -1,5 +1,7 @@
 <?php
 
 return [
-    // custom trigger name
+    'tables' => [
+        // List of tables that need to create triggers
+    ],
 ];

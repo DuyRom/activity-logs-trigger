@@ -3,6 +3,8 @@
 namespace Odinbi\ActivityLogsWithTrigger\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Odinbi\ActivityLogsWithTrigger\Services\CreateAllTriggers;
+use Odinbi\ActivityLogsWithTrigger\Services\CreateDatabaseTriggers;
 use Odinbi\ActivityLogsWithTrigger\Services\TriggerService;
 
 class TriggerServiceProvider extends ServiceProvider
@@ -20,6 +22,13 @@ class TriggerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../../database/migrations/' => database_path('migrations'),
         ], 'migrations');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreateDatabaseTriggers::class,
+                CreateAllTriggers::class,
+            ]);
+        }
     }
 
     public function register()

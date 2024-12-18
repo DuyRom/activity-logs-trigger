@@ -13,16 +13,6 @@ class TriggerServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
 
-        // Publish config
-        $this->publishes([
-            __DIR__.'/../../config/activity-logs-trigger.php' => config_path('activity-logs-trigger.php'),
-        ], 'config');
-
-        // Publish migrations
-        $this->publishes([
-            __DIR__.'/../../database/migrations/' => database_path('migrations'),
-        ], 'migrations');
-
         if ($this->app->runningInConsole()) {
             $this->commands([
                 CreateDatabaseTriggers::class,
@@ -37,8 +27,18 @@ class TriggerServiceProvider extends ServiceProvider
             __DIR__.'/../../config/activity-logs-trigger.php', 'activity-logs-trigger'
         );
 
-        $this->app->singleton(TriggerService::class, function ($app) {
-            return new TriggerService();
-        });
+        $this->app->singleton(TriggerService::class, fn($app) => new TriggerService());
+
+        $this->registerPublish();
+    }
+
+    protected function registerPublish()
+    {
+        $paths = [
+            __DIR__.'/../../config/activity-logs-trigger.php' => config_path('activity-logs-trigger.php'),
+            __DIR__.'/../../database/migrations/' => database_path('migrations'),
+        ];
+
+        $this->publishes($paths, 'odb-activity-log');
     }
 }

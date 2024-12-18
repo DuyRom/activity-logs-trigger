@@ -1,0 +1,26 @@
+{
+    "name": "odinbi/activity-logs-with-trigger",
+    "description": "Write activity logs use tringger",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Odinbi\\ActivityLogsWithTrigger\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Odinbi\\ActivityLogsWithTrigger\\Providers\\TriggerServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "DuyRom",
+            "email": "duyit192@hotmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

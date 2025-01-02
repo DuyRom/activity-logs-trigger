@@ -21,7 +21,7 @@ class CreateDatabaseTriggers extends Command
     public function handle()
     {
         $table = $this->argument('table');
-        $excludedColumns = ['id'];
+        $excludedColumns = ['id','updated_at'];
 
         $this->triggerService->createTriggers($table, $excludedColumns);
 

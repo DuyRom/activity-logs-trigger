@@ -10,6 +10,12 @@ Record query history of table in mysql
 composer require odinbi/activity-logs-with-trigger
 ```
 
+### Publish vendor
+
+```bash
+php artisan vendor:publish --tag=odb-activity-log
+```
+
 ### Migrate datatable
 Run php artisan migrate command to create activity_log_triggers table
 
@@ -23,11 +29,6 @@ Or run with folder path option
 php artisan migrate --path=database/migrations/2024_01_01_000000_create_activity_log_triggers_table.php
 ```
 
-### Publish vendor
-
-```bash
-php artisan vendor:publish --tag=odb-activity-log
-```
 ### Configuration
 Go to app/config/activity-logs-trigger.php to configure the necessary variables
 

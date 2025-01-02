@@ -18,7 +18,7 @@ class CreateActivityLogTriggersTable extends Migration
             $table->integer('user_id')->nullable();
             $table->string('action');
             $table->string('table_name');
-            $table->unsignedBigInteger('primary_key'); 
+            $table->string('primary_key'); 
             $table->json('old_values')->nullable(); 
             $table->json('new_values')->nullable(); 
             $table->timestamps();

@@ -1,6 +1,7 @@
 <?php
 
 namespace Odinbi\ActivityLogsWithTrigger\Services;
+
 use Illuminate\Support\Facades\DB;
 
 class TriggerService
@@ -18,6 +19,15 @@ class TriggerService
         $oldValuesJson = implode(', ', array_map(function ($column) {
             return "\"$column\", OLD.$column";
         }, $columns));
+
+        // Get primary key configuration
+        $primaryKeysConfig = config("activity-logs-trigger.primary_keys.$tableName", ['id']);
+        $primaryKeyNew = implode(', ', array_map(function ($key) {
+            return "NEW.$key";
+        }, $primaryKeysConfig));
+        $primaryKeyOld = implode(', ', array_map(function ($key) {
+            return "OLD.$key";
+        }, $primaryKeysConfig));
 
         // Create triggers after insert
         DB::unprepared("
@@ -45,7 +55,7 @@ class TriggerService
                     v_user_id, 
                     'insert', 
                     '$tableName', 
-                    NEW.id,
+                    CONCAT_WS(',', $primaryKeyNew),
                     NULL, 
                     new_values_json, 
                     NOW(), 
@@ -86,7 +96,7 @@ class TriggerService
                         v_user_id, 
                         'update', 
                         '$tableName', 
-                        OLD.id,
+                        CONCAT_WS(',', $primaryKeyOld),
                         old_values_json, 
                         new_values_json, 
                         NOW(), 
@@ -122,7 +132,7 @@ class TriggerService
                     v_user_id, 
                     'delete', 
                     '$tableName', 
-                    OLD.id,
+                    CONCAT_WS(',', $primaryKeyOld),
                     old_values_json, 
                     NULL, 
                     NOW(), 
